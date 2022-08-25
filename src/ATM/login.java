@@ -2,6 +2,8 @@ package ATM;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.lang.ProcessHandle.Info;
+
 import javax.swing.*;
 
 public class login implements ActionListener{
@@ -10,8 +12,9 @@ private static JPanel panel = new JPanel();
 private static JFrame frame = new JFrame();
 private static JTextField userText;
 private static JLabel passwordlabel;
-private static JTextField passText;
+private static JPasswordField passText;
 private static JButton login;
+private static JLabel validText;
 
 public static void main(String[] args) {
 		
@@ -32,7 +35,7 @@ passwordlabel = new JLabel("PIN");
 passwordlabel.setBounds(10,50,80,25);
 panel.add(passwordlabel);
 
-passText = new JTextField(20);
+passText = new JPasswordField(20);
 passText.setBounds(100,50,165,25);
 panel.add(passText);
 
@@ -40,6 +43,12 @@ login = new JButton("Login");
 login.setBounds(100,80,80,25);
 panel.add(login);
 login.addActionListener(new login());
+
+validText = new JLabel("");
+validText.setBounds(100,120,185,25);
+panel.add(validText);
+
+
 
 frame.setVisible(true);
 
@@ -49,13 +58,29 @@ frame.setVisible(true);
 public void actionPerformed(ActionEvent e) {
 	// TODO Auto-generated method stub
 	try {
-	login_db log = new login_db();
-	log.auth(userText.getText(), passText.getText());
-	menu menuobj = new menu();
-	menuobj.getmenu();	
-}
-	catch(Exception e) {
 		
+	login_db log = new login_db();  
+	char[] pas = passText.getPassword();
+	String passtring = new String(pas);
+	
+	
+	//int valid =0;
+	int valid = log.auth(userText.getText(), passtring);  
+ 
+	if(valid == 1)
+	{
+     menu menuobj = new menu();
+	  menuobj.getmenu();	
+}
+	else
+	{
+		validText.setText("Login Unsuccessful");
+	}
+	}
+	
+	catch(Exception e1) 
+	{
+		e1.printStackTrace();
 	}
 }
 } //ATM
