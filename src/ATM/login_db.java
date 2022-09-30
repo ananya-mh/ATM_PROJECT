@@ -3,7 +3,7 @@ package ATM;
 import java.sql.*;
 
 public class login_db {
-private static String url = "jdbc:mysql://localhost:3306/BANK";
+private static String url = "jdbc:mysql://localhost:3306/ATM";
 private static String uname = "root";
 private static String pass = "password";
 private static String query;
@@ -36,7 +36,6 @@ public int auth(String accno, String passwd) {
 		}
 		else 
 		{
-			
 			return 0;
 	}
 	}

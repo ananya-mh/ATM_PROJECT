@@ -15,9 +15,14 @@ private static JLabel passwordlabel;
 private static JPasswordField passText;
 private static JButton login;
 private static JLabel validText;
+protected static String accno;
 
-public static void main(String[] args) {
-		
+public static void main(String[] args){
+	 login loginobj = new login();
+	 loginobj.loginwindow(); 
+}	
+
+public void loginwindow() {
 frame.setSize(400, 400);
 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 frame.add(panel);
@@ -31,7 +36,7 @@ userText = new JTextField(20);
 userText.setBounds(100,20,165,25);
 panel.add(userText);
 
-passwordlabel = new JLabel("PIN");
+passwordlabel = new JLabel("Pin");
 passwordlabel.setBounds(10,50,80,25);
 panel.add(passwordlabel);
 
@@ -63,14 +68,16 @@ public void actionPerformed(ActionEvent e) {
 	char[] pas = passText.getPassword();
 	String passtring = new String(pas);
 	
+	accno = userText.getText();
 	
 	//int valid =0;
-	int valid = log.auth(userText.getText(), passtring);  
+	int valid = log.auth(accno, passtring);  
  
 	if(valid == 1)
 	{
      menu menuobj = new menu();
 	  menuobj.getmenu();	
+	  frame.dispose();
 }
 	else
 	{
